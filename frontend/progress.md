@@ -55,6 +55,13 @@ _(Claude fills this in as patterns emerge.)_
 ## Session log
 _(append-only; newest at top)_
 
+- **2026-06-05 — Cumulative drill (15 Qs) + Challenge 6 (call/apply/bind).** Cumulative sweep across all
+  4 areas: JS 10/10 strong; React re-render causes + useEffect infinite loop ✅✅ (both were ⚠️ day 1);
+  `interface`/`type` ✅✅; CSS centering ✅✅; ONLY soft spot `any`/`unknown` (drifted to use-cases, lost the
+  "checking off vs on + forced narrowing" mechanism — re-cemented). Big retention proof: `.find`, seq-vs-parallel,
+  `await`, `0||/??`, all previously wrong/shaky → now correct. Then Challenge 6: implemented `myBind` CORRECTLY
+  FIRST TRY on a brand-new topic (closure returns fn that `apply`s with locked `this` + rest args) — recombined
+  closures+apply+rest from the week. Going to watch call/apply/bind videos now. Next: prototypes → classes → Map/Set.
 - **2026-06-05 — Coding Challenge 5 (async-timing.js).** Built `sleep(ms)` (`new Promise(resolve =>
   setTimeout(resolve, ms))` — first attempt shadowed `resolve` w/ empty body → never resolved/hangs; fixed)
   + `runSequential`/`runParallel`, then TIMED them: saw ~923ms (sum) vs ~307ms (slowest) live. This directly
