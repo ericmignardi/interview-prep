@@ -10,7 +10,7 @@ Claude updates this after each session. Grades: ✅ solid · ⚠️ shaky, re-dr
 
 | Topic | Bank | Last drilled | Grade | Notes |
 |---|---|---|---|---|
-| JavaScript fundamentals | [01](01-javascript-fundamentals.md) | 2026-06-04 | ✅ | Re-test closed all 3 open gaps: `typeof null`→`"object"` ✅, arrow vs regular `this` ✅ (lived it in debounce), shallow vs deep copy ✅ (concept correct, minor wording). Still re-test occasionally: event-loop queue names (macro vs micro). |
+| JavaScript fundamentals | [01](01-javascript-fundamentals.md) | 2026-06-05 | ✅ | Day 3 drill: **event-loop queue NAMES now SOLID** (failed twice, nailed unprompted after videos) + **`Promise.all` vs `allSettled` now SOLID** — both flagged gaps closed. `.slice`/`.splice` ✅, HOF ✅, `?.` ✅, Object.keys/values/entries ✅, try/catch/finally ✅. Only ⚠️: `.find` vs `.filter` (said find returns boolean → it returns the element/`undefined`; boolean one is `.some`). |
 | TypeScript | [02](02-typescript.md) | 2026-06-03 | ✅ | `interface` vs `type` solid; `any` vs `unknown` mechanism **now nailed** (was ⚠️) — big improvement |
 | React & hooks | [03](03-react-and-hooks.md) | 2026-06-03 | ✅ | Infinite-loop effect bug solved cleanly w/ full causal chain; learned `React.memo`/shallow-compare/`useCallback` |
 | CSS / HTML / a11y | [04](04-css-html-a11y.md) | 2026-06-03 | ✅ | Centering (flex) correct in both Tailwind + raw CSS; learn the axis-flip-on-column follow-up |
@@ -55,6 +55,33 @@ _(Claude fills this in as patterns emerge.)_
 ## Session log
 _(append-only; newest at top)_
 
+- **2026-06-05 — Coding Challenge 5 (async-timing.js).** Built `sleep(ms)` (`new Promise(resolve =>
+  setTimeout(resolve, ms))` — first attempt shadowed `resolve` w/ empty body → never resolved/hangs; fixed)
+  + `runSequential`/`runParallel`, then TIMED them: saw ~923ms (sum) vs ~307ms (slowest) live. This directly
+  closed the Q4 sequential-vs-parallel gap from the async drill — he'd had it backwards; now proven by his own
+  code. Recurring bug: missing `return` in BOTH run fns (compute-but-don't-return). Reflex to build: "did I
+  actually return it?" Async/await much firmer now.
+- **2026-06-05 — Fresh drill: async/await (4 Qs, day 3).** Q1 `async` returns a promise ✅ ("you get a
+  Promise, not 5"). Q2 what `await` does ⚠️ — had event-loop pieces (microtask, non-blocking) but fuzzy on
+  the core: `await` *pauses/suspends* the async fn and resumes the **continuation** with the unwrapped value.
+  Q3 error handling: try/catch around await ✅; `.then().catch()` contrast ⚠️ (muddled — used `new Promise`
+  ctor + `await` inside `.then`). Q4 sequential vs parallel ❌→taught: called A "synchronous", and concluded
+  B (Promise.all) was worse — MISSED that A is sequential (time = SUM) and B is concurrent (time = slowest),
+  so B is the right choice for independent calls; conflated perf with fail-fast error handling. **Re-test:
+  sequential-vs-parallel await (sum vs max), and `await` = pause/resume continuation.**
+- **2026-06-05 — Coding: debounce-from-memory + throttle (day 3).** Rebuilt `debounce` cold from memory
+  → passed first run (retention confirmed; the copied pattern stuck). Built `throttle` from scratch: full
+  structure correct first try (closure flag, immediate first call, ignore-during-cooldown); one bug — left
+  the `setTimeout` body EMPTY so `inCooldown` never reset (track-vs-act bug family again, mirror of `once`).
+  Fixed with `inCooldown = false` in the timer. Cemented debounce-vs-throttle pair (last-call/cancel-reschedule
+  vs first-call/run-then-cooldown; elevator analogy). Next: fresh async/await drill.
+- **2026-06-05 — JS mock drill (8 Qs, day 3 AM).** Both stubborn re-tests CLOSED: event-loop queue
+  names ✅✅ (setTimeout=macro, Promise.then=micro, micro drains first — gold-standard phrasing,
+  unprompted; had failed twice prior — videos + reps worked) and `Promise.all` vs `allSettled` ✅.
+  Fresh material strong: `.slice` vs `.splice` ✅ (+ React immutability tie-in), higher-order functions
+  ✅ (connected to his own map/debounce), optional chaining `?.` ✅ (+ TypeError vs ReferenceError),
+  Object.keys/values/entries ✅, try/catch/finally ✅ (loading-state use case). Only miss: `.find` vs
+  `.filter` ⚠️ — thought `.find` returns a boolean (it returns the element/`undefined`; boolean = `.some`).
 - **2026-06-04 — JS drill + quiz + tono deep-dive.** Drill: hoisting/TDZ ✅ (after coaching — had var/let
   backwards first, recapped correctly); rest vs spread ✅; `Promise.all` vs `allSettled` ⚠️ (knew concurrency,
   missed fail-fast + didn't know allSettled); event-loop queue NAMES still ❌ (knew priority AM, but inverted

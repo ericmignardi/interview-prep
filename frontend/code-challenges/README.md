@@ -20,7 +20,10 @@ in a comment header, sample data, a function stub, and test cases with expected 
 |---|---|---|---|
 | 1 | [cart-total.js](cart-total.js) | `reduce` + `map` (cartTotal, applyDiscount, groupByName) | ✅ done 2026-06-04 |
 | 2 | [closures.js](closures.js) | closures / private state (createCounter, once) | ✅ done 2026-06-04 |
-| 3 | [debounce.js](debounce.js) | closures + timers + arg forwarding + `this` preservation | ✅ passes (copied + dissected; `this` stretch done; rebuild from scratch to confirm) |
+| 3 | [debounce.js](debounce.js) | closures + timers + arg forwarding + `this` preservation | ✅ passes (copied + dissected; `this` stretch done) |
+| 3b | [debounce-manual.js](debounce-manual.js) | debounce rebuilt FROM MEMORY (retention test) | ✅ done 2026-06-05 — passed cold, core pattern stuck |
+| 4 | [throttle.js](throttle.js) | closures + timers (throttle; pairs with debounce) | ✅ done 2026-06-05 — one fix (empty timer body → reset flag) |
+| 5 | [async-timing.js](async-timing.js) | async/await: `sleep`, sequential vs parallel (time = sum vs slowest) | ✅ done 2026-06-05 — saw ~923ms vs ~307ms live |
 
 ---
 
