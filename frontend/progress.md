@@ -55,6 +55,18 @@ _(Claude fills this in as patterns emerge.)_
 ## Session log
 _(append-only; newest at top)_
 
+- **2026-06-05 — Fresh JS drill (6 Qs, NEW material).** First exposure to several topics: type-coercion
+  `+` trap (`'5'+3`→`'53'` not 8 — MISSED, now taught), destructuring + rest (values ✅, learned rest
+  collects leftovers + object/nested/default forms), `Object.freeze` (NEW — immutable but SHALLOW), recursion
+  (def ✅, learned base case + recursive case), pure functions (NEW — deterministic + no side effects),
+  memoization (had gist, sharpened to "cache BY INPUT", needs purity, closure+object cache). **New re-test
+  queue:** `+` coercion trap, `Object.freeze` is shallow, recursion base case, pure-function 2 properties,
+  memoize = cache-by-input. Teed up a `memoize` coding challenge (closures+cache+purity — he has all pieces).
+- **2026-06-05 — Rapid quiz, full-curriculum (22 Qs).** Essentially 22/22 — clean sweep across JS
+  fundamentals, async, prototypes/classes, Map/Set, call/apply/bind, TS, React, CSS. **`any`/`unknown`
+  soft spot from prior drill → now CORRECT** (re-cemented & retained). Only micro-refinements: `forEach`
+  returns `undefined` (said "void"); `await` one-word = "pauses" (said "hands off control"). Retention
+  across the whole curriculum is now excellent — week-1 ❌ topics all automatic.
 - **2026-06-05 — Cumulative drill (15 Qs) + Challenge 6 (call/apply/bind).** Cumulative sweep across all
   4 areas: JS 10/10 strong; React re-render causes + useEffect infinite loop ✅✅ (both were ⚠️ day 1);
   `interface`/`type` ✅✅; CSS centering ✅✅; ONLY soft spot `any`/`unknown` (drifted to use-cases, lost the
