@@ -55,6 +55,11 @@ _(Claude fills this in as patterns emerge.)_
 ## Session log
 _(append-only; newest at top)_
 
+- **2026-06-06 — End-of-day mixed JS+TS quiz (15 Qs).** 14/15. Fragile JS items now SOLID unprompted
+  (`.find`→element/undefined ✅, `.splice` mutates ✅). TS all solid (unknown/never, Partial/Omit, DU narrow,
+  keyof, as const, z.infer schema→type, ChangeEvent). **Only persistent miss: `KeyboardEvent`** — said
+  "KeyEvent" for the 3rd time. Gave hook (events named after the DEVICE: Keyboard/Mouse/Focus/Change; no
+  "Key" device). RE-TEST `KeyboardEvent<HTMLInputElement>` FIRST THING next session. Done for the day.
 - **2026-06-06 — TS GRADUATION + advanced (same day). 🎓 TS marked COVERED.** After Day-1 challenges,
   watched a 1hr TS video (review), then: discriminated unions challenge (TS4, clean incl. `never`),
   taught `as const`/`keyof`/`typeof` (verbal checks ✅), typing-React challenge (TS5 — props/`useState`/
