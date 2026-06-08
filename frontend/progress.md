@@ -11,7 +11,7 @@ Claude updates this after each session. Grades: ✅ solid · ⚠️ shaky, re-dr
 | Topic | Bank | Last drilled | Grade | Notes |
 |---|---|---|---|---|
 | JavaScript fundamentals | [01](01-javascript-fundamentals.md) | 2026-06-06 | ✅ **COVERED** | Full curriculum cemented across days 1–4 (fundamentals, closures, `this`, call/apply/bind, async/await, OOP/prototypes/classes, Map/Set, coercion, pure fns, recursion, currying, JSON, modules) + 7 coding challenges. Graduation quiz 22/24. **Fragile re-test items** (slipped under speed though known): `.find` returns element/`undefined` (NOT boolean — that's `.some`); `.splice` mutates / `.slice` copies. |
-| TypeScript | [02](02-typescript.md) | 2026-06-03 | ✅ | `interface` vs `type` solid; `any` vs `unknown` mechanism **now nailed** (was ⚠️) — big improvement |
+| TypeScript | [02](02-typescript.md) | 2026-06-06 | ✅ | **TS Day 1 (diagnostic + challenge).** Foundation strong (better than typical junior — writes real TS). Solid: annotations+inference, `any`/`unknown` (re-cemented), unions+literals, narrowing/type guards. Sharpened: `never` vs `void` (never=doesn't return/throws+loops+exhaustiveness; void=returns nothing). NEW learned: **tuples** (`[string,number]` fixed-len/per-position; useState returns a tuple). TS1 challenge clean first review (tsc exit 0), extracted `Role` to named type. Toolchain set up (tsc strict, `npx tsc --noEmit`). Next: generics, utility types. |
 | React & hooks | [03](03-react-and-hooks.md) | 2026-06-03 | ✅ | Infinite-loop effect bug solved cleanly w/ full causal chain; learned `React.memo`/shallow-compare/`useCallback` |
 | CSS / HTML / a11y | [04](04-css-html-a11y.md) | 2026-06-03 | ✅ | Centering (flex) correct in both Tailwind + raw CSS; learn the axis-flip-on-column follow-up |
 | Coding challenges | [05](05-coding-challenges.md) | 2026-06-04 | ✅ | Ch1 (cart-total): reduce/map/groupByName ✅. Ch2 (closures): `createCounter` + `once` ✅ both built from scratch w/ light coaching. **Bug family identified: read-vs-assign, compute-vs-mutate, track-vs-branch — now spotting them.** |
@@ -55,6 +55,16 @@ _(Claude fills this in as patterns emerge.)_
 ## Session log
 _(append-only; newest at top)_
 
+- **2026-06-06 — TS DAY 1 (same day as JS graduation).** Diagnostic: foundation strong (annotations/
+  inference, any/unknown re-cemented, unions+literals, narrowing). Sharpened never-vs-void; NEW: tuples.
+  Then 3 coding challenges ALL clean (tsc strict): TS1 basics (annotations/union-literal/narrowing/
+  interface/tuple — extracted `Role` to named type), TS2 generics (identity/lastItem/`pair<T,U>`/constrained
+  `getId<T extends {id}>` — first try), TS3 utility types (`Partial`/`Omit`/`Pick`/`Record` — 5/5 first try).
+  Bonus live lesson: interface declaration-merging footgun (bare .ts files share global scope → added
+  `export {}` to make them modules). Moving fast — well ahead of 2-day TS estimate. **Schedule agreed:**
+  TS ~2 days total (1 more), React ~4–5 days (priority — the role), HTML/CSS ~2 days; interleave 5-min
+  rapid quizzes to keep JS/TS warm. **Next TS session:** typing React (props/events/hooks), discriminated
+  unions, `as const`, `keyof`/`typeof`, type assertions → then TS done.
 - **2026-06-06 — JS GRADUATION (day 4). 🎓 JS marked COVERED.** Re-test of fresh batch 4/4 (coercion
   `'5'+3`→`'53'` NOW retained, Object.freeze shallow, pure fns, recursion) ✅. Built **`memoize`** capstone
   (closures+cache-by-input+purity) — fixed the recurring missing-`return` (4th time → reflex now) + switched

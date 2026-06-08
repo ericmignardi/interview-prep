@@ -27,6 +27,15 @@ in a comment header, sample data, a function stub, and test cases with expected 
 | 6 | [call-apply-bind.js](call-apply-bind.js) | `this` control + implement your own `bind` | ✅ done 2026-06-05 — correct first try (closure + apply + rest) on a brand-new topic |
 | 7 | [memoize.js](memoize.js) | capstone: closures + cache-by-input + purity | ✅ done 2026-06-06 — fixed missing-return + truthiness→`in` check; ties the week together |
 
+### TypeScript challenges
+> Verify with `npx tsc --noEmit` from the `interview-prep/` folder (strict mode). No output = pass.
+
+| # | File | Focus | Status |
+|---|---|---|---|
+| TS1 | [ts-basics.ts](ts-basics.ts) | annotations, union literals, narrowing, interface, tuple | ✅ done 2026-06-06 — clean (tsc exit 0), all 5 correct incl. tuple; extracted `Role` to a named type |
+| TS2 | [ts-generics.ts](ts-generics.ts) | generics: `<T>`, multiple params, constraints (`extends`) | ✅ done 2026-06-06 — clean first try; identity/lastItem/pair(2 params)/getId(constrained) all correct |
+| TS3 | [ts-utility-types.ts](ts-utility-types.ts) | `Partial`/`Pick`/`Omit`/`Record` (+ `Omit` for NewUser) | ✅ done 2026-06-06 — 5/5 first try; learned interface-merging footgun live (files need `export {}` to be modules) |
+
 ---
 
 ### Challenge 1 — Cart total
