@@ -10,7 +10,7 @@ Claude updates this after each session. Grades: ✅ solid · ⚠️ shaky, re-dr
 
 | Topic | Bank | Last drilled | Grade | Notes |
 |---|---|---|---|---|
-| JavaScript fundamentals | [01](01-javascript-fundamentals.md) | 2026-06-05 | ✅ | Day 3 drill: **event-loop queue NAMES now SOLID** (failed twice, nailed unprompted after videos) + **`Promise.all` vs `allSettled` now SOLID** — both flagged gaps closed. `.slice`/`.splice` ✅, HOF ✅, `?.` ✅, Object.keys/values/entries ✅, try/catch/finally ✅. Only ⚠️: `.find` vs `.filter` (said find returns boolean → it returns the element/`undefined`; boolean one is `.some`). |
+| JavaScript fundamentals | [01](01-javascript-fundamentals.md) | 2026-06-06 | ✅ **COVERED** | Full curriculum cemented across days 1–4 (fundamentals, closures, `this`, call/apply/bind, async/await, OOP/prototypes/classes, Map/Set, coercion, pure fns, recursion, currying, JSON, modules) + 7 coding challenges. Graduation quiz 22/24. **Fragile re-test items** (slipped under speed though known): `.find` returns element/`undefined` (NOT boolean — that's `.some`); `.splice` mutates / `.slice` copies. |
 | TypeScript | [02](02-typescript.md) | 2026-06-03 | ✅ | `interface` vs `type` solid; `any` vs `unknown` mechanism **now nailed** (was ⚠️) — big improvement |
 | React & hooks | [03](03-react-and-hooks.md) | 2026-06-03 | ✅ | Infinite-loop effect bug solved cleanly w/ full causal chain; learned `React.memo`/shallow-compare/`useCallback` |
 | CSS / HTML / a11y | [04](04-css-html-a11y.md) | 2026-06-03 | ✅ | Centering (flex) correct in both Tailwind + raw CSS; learn the axis-flip-on-column follow-up |
@@ -55,6 +55,15 @@ _(Claude fills this in as patterns emerge.)_
 ## Session log
 _(append-only; newest at top)_
 
+- **2026-06-06 — JS GRADUATION (day 4). 🎓 JS marked COVERED.** Re-test of fresh batch 4/4 (coercion
+  `'5'+3`→`'53'` NOW retained, Object.freeze shallow, pure fns, recursion) ✅. Built **`memoize`** capstone
+  (closures+cache-by-input+purity) — fixed the recurring missing-`return` (4th time → reflex now) + switched
+  truthiness to `in` presence check. Mop-up drill: currying ✅ (def right, learned partial-application use),
+  JSON.parse/stringify ✅✅ (own-code examples), ES modules named vs default ✅. Graduation rapid quiz 22/24:
+  two SLIPS on array-method details he'd previously gotten right (under speed): `.find` returns element/
+  `undefined` not boolean (said "false"); `.splice` mutates not `.slice` (reversed). **TOP re-test queue for
+  TS phase: `.find` return value + `slice`/`splice` mutation** (fragile, not unknown). JS coding challenges
+  1–7 all done. Moving to TypeScript.
 - **2026-06-05 — Fresh JS drill (6 Qs, NEW material).** First exposure to several topics: type-coercion
   `+` trap (`'5'+3`→`'53'` not 8 — MISSED, now taught), destructuring + rest (values ✅, learned rest
   collects leftovers + object/nested/default forms), `Object.freeze` (NEW — immutable but SHALLOW), recursion

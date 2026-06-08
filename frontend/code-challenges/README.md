@@ -25,6 +25,7 @@ in a comment header, sample data, a function stub, and test cases with expected 
 | 4 | [throttle.js](throttle.js) | closures + timers (throttle; pairs with debounce) | ✅ done 2026-06-05 — one fix (empty timer body → reset flag) |
 | 5 | [async-timing.js](async-timing.js) | async/await: `sleep`, sequential vs parallel (time = sum vs slowest) | ✅ done 2026-06-05 — saw ~923ms vs ~307ms live |
 | 6 | [call-apply-bind.js](call-apply-bind.js) | `this` control + implement your own `bind` | ✅ done 2026-06-05 — correct first try (closure + apply + rest) on a brand-new topic |
+| 7 | [memoize.js](memoize.js) | capstone: closures + cache-by-input + purity | ✅ done 2026-06-06 — fixed missing-return + truthiness→`in` check; ties the week together |
 
 ---
 
