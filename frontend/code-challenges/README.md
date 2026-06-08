@@ -35,6 +35,9 @@ in a comment header, sample data, a function stub, and test cases with expected 
 | TS1 | [ts-basics.ts](ts-basics.ts) | annotations, union literals, narrowing, interface, tuple | ✅ done 2026-06-06 — clean (tsc exit 0), all 5 correct incl. tuple; extracted `Role` to a named type |
 | TS2 | [ts-generics.ts](ts-generics.ts) | generics: `<T>`, multiple params, constraints (`extends`) | ✅ done 2026-06-06 — clean first try; identity/lastItem/pair(2 params)/getId(constrained) all correct |
 | TS3 | [ts-utility-types.ts](ts-utility-types.ts) | `Partial`/`Pick`/`Omit`/`Record` (+ `Omit` for NewUser) | ✅ done 2026-06-06 — 5/5 first try; learned interface-merging footgun live (files need `export {}` to be modules) |
+| TS4 | [ts-discriminated-unions.ts](ts-discriminated-unions.ts) | discriminated union + narrowing + `never` exhaustiveness | ✅ done 2026-06-06 — clean first try incl. the `never` exhaustiveness guard |
+| TS5 | [ts-react.tsx](ts-react.tsx) | typing React: props, `useState`, event handlers | ✅ done 2026-06-06 — clean; props/optional, `useState<number>`, `React.ChangeEvent`, `useState<User\|null>` |
+| TS6 | [ts-combined.ts](ts-combined.ts) | generics+keyof+constraint+indexed access, Partial, discriminated-union reducer | ✅ done 2026-06-06 — types perfect first try; logic bugs (state++ / decrement +→-) caught by reading, NOT tsc → "types ≠ logic" lesson |
 
 ---
 

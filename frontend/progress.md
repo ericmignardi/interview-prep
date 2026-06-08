@@ -11,7 +11,7 @@ Claude updates this after each session. Grades: ✅ solid · ⚠️ shaky, re-dr
 | Topic | Bank | Last drilled | Grade | Notes |
 |---|---|---|---|---|
 | JavaScript fundamentals | [01](01-javascript-fundamentals.md) | 2026-06-06 | ✅ **COVERED** | Full curriculum cemented across days 1–4 (fundamentals, closures, `this`, call/apply/bind, async/await, OOP/prototypes/classes, Map/Set, coercion, pure fns, recursion, currying, JSON, modules) + 7 coding challenges. Graduation quiz 22/24. **Fragile re-test items** (slipped under speed though known): `.find` returns element/`undefined` (NOT boolean — that's `.some`); `.splice` mutates / `.slice` copies. |
-| TypeScript | [02](02-typescript.md) | 2026-06-06 | ✅ | **TS Day 1 (diagnostic + challenge).** Foundation strong (better than typical junior — writes real TS). Solid: annotations+inference, `any`/`unknown` (re-cemented), unions+literals, narrowing/type guards. Sharpened: `never` vs `void` (never=doesn't return/throws+loops+exhaustiveness; void=returns nothing). NEW learned: **tuples** (`[string,number]` fixed-len/per-position; useState returns a tuple). TS1 challenge clean first review (tsc exit 0), extracted `Role` to named type. Toolchain set up (tsc strict, `npx tsc --noEmit`). Next: generics, utility types. |
+| TypeScript | [02](02-typescript.md) | 2026-06-06 | ✅ **COVERED** | Full TS curriculum in ~1 day (well ahead of 2-day est). Diagnostic strong (above-junior — writes real TS). Covered: annotations/inference, any/unknown/never/void, unions/literals, narrowing/type guards, tuples, generics(+constraints), utility types (Partial/Pick/Omit/Record), discriminated unions+`never` exhaustiveness, `as const`/`keyof`/`typeof`, typing React (props/events/`useState<T\|null>`). **6 clean coding challenges** (TS1–TS6). Graduation quiz 22/23. Meta-lesson landed: green `tsc` ≠ correct logic. **Weak spot: React event types** — improved 0/1→5/6 in a drill; `KeyboardEvent<HTMLInputElement>` (event-kind vs element slot) + `ChangeEventHandler` variant to re-test. The 4 core: `ChangeEvent<HTMLInputElement>`, `FormEvent<HTMLFormElement>`, `MouseEvent<HTMLButtonElement>`, `KeyboardEvent<HTMLInputElement>`. |
 | React & hooks | [03](03-react-and-hooks.md) | 2026-06-03 | ✅ | Infinite-loop effect bug solved cleanly w/ full causal chain; learned `React.memo`/shallow-compare/`useCallback` |
 | CSS / HTML / a11y | [04](04-css-html-a11y.md) | 2026-06-03 | ✅ | Centering (flex) correct in both Tailwind + raw CSS; learn the axis-flip-on-column follow-up |
 | Coding challenges | [05](05-coding-challenges.md) | 2026-06-04 | ✅ | Ch1 (cart-total): reduce/map/groupByName ✅. Ch2 (closures): `createCounter` + `once` ✅ both built from scratch w/ light coaching. **Bug family identified: read-vs-assign, compute-vs-mutate, track-vs-branch — now spotting them.** |
@@ -55,6 +55,16 @@ _(Claude fills this in as patterns emerge.)_
 ## Session log
 _(append-only; newest at top)_
 
+- **2026-06-06 — TS GRADUATION + advanced (same day). 🎓 TS marked COVERED.** After Day-1 challenges,
+  watched a 1hr TS video (review), then: discriminated unions challenge (TS4, clean incl. `never`),
+  taught `as const`/`keyof`/`typeof` (verbal checks ✅), typing-React challenge (TS5 — props/`useState`/
+  `ChangeEvent`/`useState<User\|null>`, clean; installed @types/react + JSX in tsconfig), TS graduation
+  quiz 22/23 (only miss: event type — said `InputEventHandler` → it's `ChangeEvent`). Focused event-types
+  drill: 5/6 (missed `KeyboardEvent<HTMLInputElement>` — swapped event-kind/element slots; `...Handler`
+  variant). Capstone TS6 combined challenge (getProperty generic+keyof+constraint+T[K], updateEntity+Partial,
+  discriminated-union reducer): types perfect first try, but reducer LOGIC bugs (state++ → state+by; decrement
+  +→-) that tsc could NOT catch → drove home "types guarantee shapes not logic." Wants project-review quizzing
+  next (TS-flavored), NOT React until tomorrow.
 - **2026-06-06 — TS DAY 1 (same day as JS graduation).** Diagnostic: foundation strong (annotations/
   inference, any/unknown re-cemented, unions+literals, narrowing). Sharpened never-vs-void; NEW: tuples.
   Then 3 coding challenges ALL clean (tsc strict): TS1 basics (annotations/union-literal/narrowing/

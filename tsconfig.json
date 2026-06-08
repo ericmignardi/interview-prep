@@ -6,7 +6,9 @@
     "moduleResolution": "bundler",
     "noEmit": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"]
   },
-  "include": ["frontend/code-challenges/**/*.ts"]
+  "include": ["frontend/code-challenges/**/*.ts", "frontend/code-challenges/**/*.tsx"]
 }

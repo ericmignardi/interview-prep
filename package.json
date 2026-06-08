@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/ericmignardi/interview-prep#readme",
   "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   }
