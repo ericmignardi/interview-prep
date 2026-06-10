@@ -1,79 +1,57 @@
 # Frontend Code Challenges
 
-Hands-on coding practice. Each challenge has its own runnable `.js` (or `.ts`) file with the prompt
-in a comment header, sample data, a function stub, and test cases with expected outputs.
+Hands-on coding practice, organized by track. Each challenge file has the prompt in a comment
+header, a stub to implement, and tests/expected outputs.
 
-**Workflow:**
-1. Open the challenge file, read the prompt at the top.
-2. Implement the stub yourself — don't peek at the study-bank solutions unless truly stuck.
-3. Run it: `node <file>.js` and check your output against the expected values in the tests.
-4. Tell Claude when you're done (or stuck) for a review + a stretch variant.
-
-> Convention: challenge files live here as `interview-prep/frontend/code-challenges/<name>.js`.
-> (Backend challenges will live under `interview-prep/backend/code-challenges/` when we get there.)
-
----
-
-## Challenges
-
-| # | File | Focus | Status |
-|---|---|---|---|
-| 1 | [cart-total.js](cart-total.js) | `reduce` + `map` (cartTotal, applyDiscount, groupByName) | ✅ done 2026-06-04 |
-| 2 | [closures.js](closures.js) | closures / private state (createCounter, once) | ✅ done 2026-06-04 |
-| 3 | [debounce.js](debounce.js) | closures + timers + arg forwarding + `this` preservation | ✅ passes (copied + dissected; `this` stretch done) |
-| 3b | [debounce-manual.js](debounce-manual.js) | debounce rebuilt FROM MEMORY (retention test) | ✅ done 2026-06-05 — passed cold, core pattern stuck |
-| 4 | [throttle.js](throttle.js) | closures + timers (throttle; pairs with debounce) | ✅ done 2026-06-05 — one fix (empty timer body → reset flag) |
-| 5 | [async-timing.js](async-timing.js) | async/await: `sleep`, sequential vs parallel (time = sum vs slowest) | ✅ done 2026-06-05 — saw ~923ms vs ~307ms live |
-| 6 | [call-apply-bind.js](call-apply-bind.js) | `this` control + implement your own `bind` | ✅ done 2026-06-05 — correct first try (closure + apply + rest) on a brand-new topic |
-| 7 | [memoize.js](memoize.js) | capstone: closures + cache-by-input + purity | ✅ done 2026-06-06 — fixed missing-return + truthiness→`in` check; ties the week together |
-
-### React challenges
-> Build the component/hook, then run its tests: `npx vitest run <Name>` (or watch: `npx vitest <Name>`).
-> Make all tests green. Type-check too with `npx tsc --noEmit`.
-
-| # | File | Focus | Status |
-|---|---|---|---|
-| R1 | [Counter.tsx](Counter.tsx) | useState + functional updater, events, rendering | ✅ done 2026-06-07 — 5/5 green; logic right first try (only fixed button labels → Testing Library queries by accessible name) |
-| R2 | [useToggle.ts](useToggle.ts) | custom hook + useState + useCallback + typed tuple return | ✅ done 2026-06-07 — 4/4 green; learned `useCallback` deps = what the fn reads from scope (`[value]`→`[]`) |
-| R3 | [ContactForm.tsx](ContactForm.tsx) | controlled inputs + validation + form submit (preventDefault) | ✅ done 2026-06-07 — 5/5 green; key fix: handlers update STATE→re-render (not "return JSX from handler"); inline vs extracted handler typing clarified |
-| R4 | [CounterReducer.tsx](CounterReducer.tsx) | `useReducer` + discriminated-union actions + dispatch | ✅ done 2026-06-07 — 5/5 green; reducer returns NEW state object (pure), `onClick={() => dispatch(...)}` (pass not call) |
-
-### TypeScript challenges
-> Verify with `npx tsc --noEmit` from the `interview-prep/` folder (strict mode). No output = pass.
-
-| # | File | Focus | Status |
-|---|---|---|---|
-| TS1 | [ts-basics.ts](ts-basics.ts) | annotations, union literals, narrowing, interface, tuple | ✅ done 2026-06-06 — clean (tsc exit 0), all 5 correct incl. tuple; extracted `Role` to a named type |
-| TS2 | [ts-generics.ts](ts-generics.ts) | generics: `<T>`, multiple params, constraints (`extends`) | ✅ done 2026-06-06 — clean first try; identity/lastItem/pair(2 params)/getId(constrained) all correct |
-| TS3 | [ts-utility-types.ts](ts-utility-types.ts) | `Partial`/`Pick`/`Omit`/`Record` (+ `Omit` for NewUser) | ✅ done 2026-06-06 — 5/5 first try; learned interface-merging footgun live (files need `export {}` to be modules) |
-| TS4 | [ts-discriminated-unions.ts](ts-discriminated-unions.ts) | discriminated union + narrowing + `never` exhaustiveness | ✅ done 2026-06-06 — clean first try incl. the `never` exhaustiveness guard |
-| TS5 | [ts-react.tsx](ts-react.tsx) | typing React: props, `useState`, event handlers | ✅ done 2026-06-06 — clean; props/optional, `useState<number>`, `React.ChangeEvent`, `useState<User\|null>` |
-| TS6 | [ts-combined.ts](ts-combined.ts) | generics+keyof+constraint+indexed access, Partial, discriminated-union reducer | ✅ done 2026-06-06 — types perfect first try; logic bugs (state++ / decrement +→-) caught by reading, NOT tsc → "types ≠ logic" lesson |
-
----
-
-### Challenge 1 — Cart total
-**File:** [cart-total.js](cart-total.js) · **Focus:** `reduce`
-
-Write `cartTotal(cart)` that returns the total cost of everything in the cart — each item's
-`price × qty`, all summed together.
-
-```js
-const cart = [
-  { name: 'Strings', price: 12, qty: 2 },
-  { name: 'Picks',   price: 5,  qty: 3 },
-  { name: 'Capo',    price: 20, qty: 1 },
-];
-
-cartTotal(cart); // 59   → (12×2) + (5×3) + (20×1)
-cartTotal([]);   // 0    → empty cart (this is why the reduce initial value matters)
+```
+code-challenges/
+  javascript/   # plain JS — run with: node <file>.js
+  typescript/   # TS — type-check with: npx tsc --noEmit  (no output = pass)
+  react/        # React + tests — run with: npx vitest run <Name>
 ```
 
-**Requirements:**
-- Use `reduce`.
-- Give `reduce` a proper initial value.
-- Bonus (TS): what's the type of `cart`, and the return type?
+**Workflow:** open a challenge → read the prompt → implement the stub yourself → run it (see commands
+above) → tell Claude when done/stuck for a review + stretch variant.
 
-**Stretch (after it works):**
-- `applyDiscount(cart, pct)` → return a **new** cart with each price reduced by `pct`% (use `map`).
-- `groupByName(cart)` → return an object keyed by item name (use `reduce` into an object).
+---
+
+## JavaScript — `javascript/`
+> Run: `node javascript/<file>.js`
+
+| # | File | Focus | Status |
+|---|---|---|---|
+| 1 | [cart-total.js](javascript/cart-total.js) | `reduce` + `map` (cartTotal, applyDiscount, groupByName) | ✅ 2026-06-04 |
+| 2 | [closures.js](javascript/closures.js) | closures / private state (createCounter, once) | ✅ 2026-06-04 |
+| 3 | [debounce.js](javascript/debounce.js) | closures + timers + arg forwarding + `this` preservation | ✅ (copied + dissected; `this` stretch) |
+| 3b | [debounce-manual.js](javascript/debounce-manual.js) | debounce rebuilt FROM MEMORY (retention) | ✅ 2026-06-05 — passed cold |
+| 4 | [throttle.js](javascript/throttle.js) | closures + timers (throttle; pairs w/ debounce) | ✅ 2026-06-05 |
+| 4b | [throttle-manual.js](javascript/throttle-manual.js) | throttle from memory | scratch |
+| 5 | [async-timing.js](javascript/async-timing.js) | async/await: `sleep`, sequential vs parallel | ✅ 2026-06-05 — saw ~923ms vs ~307ms |
+| 6 | [call-apply-bind.js](javascript/call-apply-bind.js) | `this` control + implement your own `bind` | ✅ 2026-06-05 — first try |
+| 6b | [call-apply-bind-manual.js](javascript/call-apply-bind-manual.js) | bind from memory | scratch |
+| 7 | [memoize.js](javascript/memoize.js) | capstone: closures + cache-by-input + purity | ✅ 2026-06-06 |
+
+## TypeScript — `typescript/`
+> Verify: `npx tsc --noEmit` from the `interview-prep/` folder (strict mode). No output = pass.
+
+| # | File | Focus | Status |
+|---|---|---|---|
+| TS1 | [ts-basics.ts](typescript/ts-basics.ts) | annotations, union literals, narrowing, interface, tuple | ✅ 2026-06-06 — all 5 |
+| TS2 | [ts-generics.ts](typescript/ts-generics.ts) | generics: `<T>`, multiple params, constraints (`extends`) | ✅ 2026-06-06 — first try |
+| TS3 | [ts-utility-types.ts](typescript/ts-utility-types.ts) | `Partial`/`Pick`/`Omit`/`Record` | ✅ 2026-06-06 — 5/5 |
+| TS4 | [ts-discriminated-unions.ts](typescript/ts-discriminated-unions.ts) | discriminated union + narrowing + `never` exhaustiveness | ✅ 2026-06-06 |
+| TS5 | [ts-react.tsx](typescript/ts-react.tsx) | typing React: props, `useState`, event handlers | ✅ 2026-06-06 |
+| TS6 | [ts-combined.ts](typescript/ts-combined.ts) | generics+keyof+constraint+indexed access, Partial, DU reducer | ✅ 2026-06-06 — "types ≠ logic" lesson |
+
+## React — `react/`
+> Build the component/hook, then run its tests: `npx vitest run <Name>` (watch: `npx vitest <Name>`).
+> Type-check too with `npx tsc --noEmit`.
+
+| # | File | Focus | Status |
+|---|---|---|---|
+| R1 | [Counter.tsx](react/Counter.tsx) | useState + functional updater, events, rendering | ✅ 2026-06-07 — 5/5 |
+| R2 | [useToggle.ts](react/useToggle.ts) | custom hook + useState + useCallback + typed tuple | ✅ 2026-06-07 — 4/4 |
+| R3 | [ContactForm.tsx](react/ContactForm.tsx) | controlled inputs + validation + submit | ✅ 2026-06-07 — 5/5 |
+| R4 | [CounterReducer.tsx](react/CounterReducer.tsx) | `useReducer` + discriminated-union actions + dispatch | ✅ 2026-06-07 — 5/5 |
+| R5 | [useFetch.ts](react/useFetch.ts) | data-fetching hook: loading/error/data + cleanup + generics | ✅ 2026-06-07 — 3/3 green; learned `res.ok` check (fetch doesn't reject on HTTP errors), `active` guards, no re-throw |
+| — | [StaleClosureDemo.tsx](react/StaleClosureDemo.tsx) | proof of the stale-closure trap (reference) | ✅ demo |
