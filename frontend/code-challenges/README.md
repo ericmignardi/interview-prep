@@ -27,6 +27,17 @@ in a comment header, sample data, a function stub, and test cases with expected 
 | 6 | [call-apply-bind.js](call-apply-bind.js) | `this` control + implement your own `bind` | ✅ done 2026-06-05 — correct first try (closure + apply + rest) on a brand-new topic |
 | 7 | [memoize.js](memoize.js) | capstone: closures + cache-by-input + purity | ✅ done 2026-06-06 — fixed missing-return + truthiness→`in` check; ties the week together |
 
+### React challenges
+> Build the component/hook, then run its tests: `npx vitest run <Name>` (or watch: `npx vitest <Name>`).
+> Make all tests green. Type-check too with `npx tsc --noEmit`.
+
+| # | File | Focus | Status |
+|---|---|---|---|
+| R1 | [Counter.tsx](Counter.tsx) | useState + functional updater, events, rendering | ✅ done 2026-06-07 — 5/5 green; logic right first try (only fixed button labels → Testing Library queries by accessible name) |
+| R2 | [useToggle.ts](useToggle.ts) | custom hook + useState + useCallback + typed tuple return | ✅ done 2026-06-07 — 4/4 green; learned `useCallback` deps = what the fn reads from scope (`[value]`→`[]`) |
+| R3 | [ContactForm.tsx](ContactForm.tsx) | controlled inputs + validation + form submit (preventDefault) | ✅ done 2026-06-07 — 5/5 green; key fix: handlers update STATE→re-render (not "return JSX from handler"); inline vs extracted handler typing clarified |
+| R4 | [CounterReducer.tsx](CounterReducer.tsx) | `useReducer` + discriminated-union actions + dispatch | ✅ done 2026-06-07 — 5/5 green; reducer returns NEW state object (pure), `onClick={() => dispatch(...)}` (pass not call) |
+
 ### TypeScript challenges
 > Verify with `npx tsc --noEmit` from the `interview-prep/` folder (strict mode). No output = pass.
 
