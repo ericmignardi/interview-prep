@@ -55,6 +55,14 @@ _(Claude fills this in as patterns emerge.)_
 ## Session log
 _(append-only; newest at top)_
 
+- **2026-06-07 (cont.) — React Mechanics #1 (Ticker) + the closure/render model.** Built Ticker
+  (auto-incrementing interval) — used functional updater AND explained the stale-closure trap correctly
+  (effect runs once → interval callback frozen on render #0's count). Did a FULL breakdown of why naive
+  `setCount(count+1)` sticks at 1 + the 3 fixes (functional updater / ref / deps). He's at the "can do it
+  but feels slippery" stage on closures+rerenders+lifecycle — NORMAL pre-mastery; reassured + gave the
+  4-sentence model (component = a function React re-runs every render; each run = a fresh photo; closures
+  remember the photo they were born in; old callbacks see old photos). Going to review useDebounce/useReducer
+  videos, back tomorrow for more React.
 - **2026-06-07 — Cumulative JS+TS review → REACT PHASE kickoff (big day).** Opened: cumulative JS+TS
   sweep (~flawless; KeyboardEvent finally locked). React diagnostic strong. Set up Vitest+RTL toolchain
   (`npx vitest run <Name>`) and built **8 challenges, all green**: Counter, useToggle, ContactForm,
