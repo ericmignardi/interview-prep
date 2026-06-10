@@ -62,3 +62,23 @@ export function useFetch<T>(url: string): FetchState<T> {
 
   return { data, loading, error };
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// REFERENCE — the same logic written with a .then()/.catch()/.finally() chain.
+// (Note: with the chain, handleFetch does NOT need to be `async` — no `await`.)
+//
+//   const handleFetch = () => {
+//     setLoading(true);
+//     setError(null);
+//     fetch(url)
+//       .then((res) => {
+//         if (!res.ok) throw new Error(`HTTP ${res.status}`); // thrown → goes to .catch
+//         return res.json();                                  // returned promise auto-chains
+//       })
+//       .then((json) => { if (active) setData(json); })
+//       .catch((err) => { if (active) setError(err.message); })
+//       .finally(() => { if (active) setLoading(false); });
+//   };
+//
+// Both are equivalent. async/await + try/catch/finally is generally preferred today.
+// ─────────────────────────────────────────────────────────────────────────────
