@@ -54,4 +54,6 @@ above) → tell Claude when done/stuck for a review + stretch variant.
 | R3 | [ContactForm.tsx](react/ContactForm.tsx) | controlled inputs + validation + submit | ✅ 2026-06-07 — 5/5 |
 | R4 | [CounterReducer.tsx](react/CounterReducer.tsx) | `useReducer` + discriminated-union actions + dispatch | ✅ 2026-06-07 — 5/5 |
 | R5 | [useFetch.ts](react/useFetch.ts) | data-fetching hook: loading/error/data + cleanup + generics | ✅ 2026-06-07 — 3/3 green; learned `res.ok` check (fetch doesn't reject on HTTP errors), `active` guards, no re-throw |
+| R6 | [ProductList.tsx](react/ProductList.tsx) | lists + keys + DERIVED state (don't store filtered list) | ✅ 2026-06-07 — 5/5 green; derived `visible` list (no separate state), stable keys, empty state |
+| R7 | [useDebounce.ts](react/useDebounce.ts) | debounce a VALUE via useEffect cleanup (cancel-and-reschedule) + generics | ✅ 2026-06-07 — 3/3 green first try; same pattern as JS debounce (cleanup = clearTimeout) |
 | — | [StaleClosureDemo.tsx](react/StaleClosureDemo.tsx) | proof of the stale-closure trap (reference) | ✅ demo |
