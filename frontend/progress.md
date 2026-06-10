@@ -12,7 +12,7 @@ Claude updates this after each session. Grades: ✅ solid · ⚠️ shaky, re-dr
 |---|---|---|---|---|
 | JavaScript fundamentals | [01](01-javascript-fundamentals.md) | 2026-06-06 | ✅ **COVERED** | Full curriculum cemented across days 1–4 (fundamentals, closures, `this`, call/apply/bind, async/await, OOP/prototypes/classes, Map/Set, coercion, pure fns, recursion, currying, JSON, modules) + 7 coding challenges. Graduation quiz 22/24. **Fragile re-test items** (slipped under speed though known): `.find` returns element/`undefined` (NOT boolean — that's `.some`); `.splice` mutates / `.slice` copies. |
 | TypeScript | [02](02-typescript.md) | 2026-06-06 | ✅ **COVERED** | Full TS curriculum in ~1 day (well ahead of 2-day est). Diagnostic strong (above-junior — writes real TS). Covered: annotations/inference, any/unknown/never/void, unions/literals, narrowing/type guards, tuples, generics(+constraints), utility types (Partial/Pick/Omit/Record), discriminated unions+`never` exhaustiveness, `as const`/`keyof`/`typeof`, typing React (props/events/`useState<T\|null>`). **6 clean coding challenges** (TS1–TS6). Graduation quiz 22/23. Meta-lesson landed: green `tsc` ≠ correct logic. **Weak spot: React event types** — improved 0/1→5/6 in a drill; `KeyboardEvent<HTMLInputElement>` (event-kind vs element slot) + `ChangeEventHandler` variant to re-test. The 4 core: `ChangeEvent<HTMLInputElement>`, `FormEvent<HTMLFormElement>`, `MouseEvent<HTMLButtonElement>`, `KeyboardEvent<HTMLInputElement>`. |
-| React & hooks | [03](03-react-and-hooks.md) | 2026-06-03 | ✅ | Infinite-loop effect bug solved cleanly w/ full causal chain; learned `React.memo`/shallow-compare/`useCallback` |
+| React & hooks | [03](03-react-and-hooks.md) | 2026-06-07 | ✅ **strong** | React phase begun. Diagnostic above-junior. **8 build-and-run challenges** (Vitest+RTL): Counter, useToggle, ContactForm, CounterReducer, useFetch, ProductList, useDebounce, useLocalStorage — all green. Solid: re-render model + closure-snapshot (proved stale-closure live), functional updater, controlled inputs, useReducer, derived state, custom hooks, useEffect cleanup, useDebounce. Learned: lazy initializer `useState(()=>...)`, `&&`/`?:`/`??` in JSX (+ `0 &&` gotcha), wrapped setter. **Recurring tell: "pass vs CALL a function"** (onClick/dispatch/setTimeout). **To review:** React Query (name-drop for data fetching), the `useFetch` res.ok gotcha. |
 | CSS / HTML / a11y | [04](04-css-html-a11y.md) | 2026-06-03 | ✅ | Centering (flex) correct in both Tailwind + raw CSS; learn the axis-flip-on-column follow-up |
 | Coding challenges | [05](05-coding-challenges.md) | 2026-06-04 | ✅ | Ch1 (cart-total): reduce/map/groupByName ✅. Ch2 (closures): `createCounter` + `once` ✅ both built from scratch w/ light coaching. **Bug family identified: read-vs-assign, compute-vs-mutate, track-vs-branch — now spotting them.** |
 | Project deep-dive: tono | [06](06-project-talking-points.md) | 2026-06-04 | ✅ | Strong pitch (problem→solution→stack). Walked the FULL /api/tones pipeline in order w/ correct statuses (401→429→404→400→403; used 403 correctly!). Knew the credit txn but needed coaching on *why* (race condition / isolation). Graceful-degradation instinct right; coached the downside (silent degradation of a PAID feature → signal it). |
@@ -55,6 +55,15 @@ _(Claude fills this in as patterns emerge.)_
 ## Session log
 _(append-only; newest at top)_
 
+- **2026-06-07 — Cumulative JS+TS review → REACT PHASE kickoff (big day).** Opened: cumulative JS+TS
+  sweep (~flawless; KeyboardEvent finally locked). React diagnostic strong. Set up Vitest+RTL toolchain
+  (`npx vitest run <Name>`) and built **8 challenges, all green**: Counter, useToggle, ContactForm,
+  CounterReducer, useFetch, ProductList, useDebounce, useLocalStorage (+ StaleClosureDemo proof). Reorganized
+  code-challenges into javascript/ typescript/ react/ subfolders. React mock drill (5 Qs, strong; learned
+  lazy initializer). Project review: RHF-vs-controlled (uncontrolled→fewer re-renders), state placement
+  (colocate→lift→Context→store), data fetching (improve story: extract hook / React Query / stale handling /
+  Next server-fetch), component breakdown. **Recurring tell: pass-vs-CALL a function. To review: React Query
+  concept; `&&` `0` JSX gotcha.** Next: useRef, useMemo, Context, React.memo in practice → more builds.
 - **2026-06-06 — End-of-day mixed JS+TS quiz (15 Qs).** 14/15. Fragile JS items now SOLID unprompted
   (`.find`→element/undefined ✅, `.splice` mutates ✅). TS all solid (unknown/never, Partial/Omit, DU narrow,
   keyof, as const, z.infer schema→type, ChangeEvent). **Only persistent miss: `KeyboardEvent`** — said
