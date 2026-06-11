@@ -55,6 +55,16 @@ _(Claude fills this in as patterns emerge.)_
 ## Session log
 _(append-only; newest at top)_
 
+- **2026-06-08 — React: useRef + Context + consolidation quiz.** Built **Stopwatch (R9, useRef** — interval
+  id in a ref; finished w/ help, key lesson: ref persists across renders w/o re-render) and **ThemeContext
+  (R10, Context** — provider + useContext + custom hook w/ undefined-default guard; fixed w/ help). **React
+  rapid quiz: ~12/12** — re-render triggers, functional updater, effect deps/cleanup, useRef vs useState,
+  useReducer, custom hooks, controlled inputs, derived state, Context internals, lazy init, React.memo+refs.
+  KEY MORALE POINT: he felt "fuzzy" on closures but rattled off the entire hooks model near-flawlessly —
+  the PRACTICAL model is solid; only the deepest closure "why" feels slippery (normal, crystallizes w/ reps).
+  Trend this session: leaning on "do/fix it for me" (fatigue). Modeled a dropzone project walkthrough +
+  coached the 4-beat structure (what it does / stack / structure / one hard part). **HOMEWORK: say a project
+  walkthrough out loud in his own words** (can't outsource this). Core hooks now ALL built by hand.
 - **2026-06-07 (cont.) — React Mechanics #1 (Ticker) + the closure/render model.** Built Ticker
   (auto-incrementing interval) — used functional updater AND explained the stale-closure trap correctly
   (effect runs once → interval callback frozen on render #0's count). Did a FULL breakdown of why naive
