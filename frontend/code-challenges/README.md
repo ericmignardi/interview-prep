@@ -57,5 +57,6 @@ above) → tell Claude when done/stuck for a review + stretch variant.
 | R6 | [ProductList.tsx](react/ProductList.tsx) | lists + keys + DERIVED state (don't store filtered list) | ✅ 2026-06-07 — 5/5 green; derived `visible` list (no separate state), stable keys, empty state |
 | R7 | [useDebounce.ts](react/useDebounce.ts) | debounce a VALUE via useEffect cleanup (cancel-and-reschedule) + generics | ✅ 2026-06-07 — 3/3 green first try; same pattern as JS debounce (cleanup = clearTimeout) |
 | R8 | [useLocalStorage.ts](react/useLocalStorage.ts) | persisted state: lazy init from storage + sync on set + generics | ✅ 2026-06-07 — 5/5 green w/ coaching; gaps were lazy-initializer (read once) + wrapped setter (persist on set) |
+| R9 | [Stopwatch.tsx](react/Stopwatch.tsx) | `useRef` (mutable persistent box) — interval id in a ref; start/stop/reset | ✅ 2026-06-08 — 4/4 (finished w/ help); ref persists id across renders w/o re-render; guard + null-on-stop |
 | M1 | [Ticker.tsx](react/Ticker.tsx) | MECHANICS: stale-closure interval (effect runs once → fix it) | ✅ 2026-06-07 — 3/3; used functional updater + explained the trap correctly |
 | — | [StaleClosureDemo.tsx](react/StaleClosureDemo.tsx) | proof of the stale-closure trap (reference) | ✅ demo |
