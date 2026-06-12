@@ -1,4 +1,3 @@
-// Shape of a show from the TVmaze API (the fields we actually use).
 export type Show = {
   id: number;
   name: string;
@@ -8,8 +7,21 @@ export type Show = {
   rating: { average: number | null };
 };
 
-// The /search/shows endpoint returns an array of these.
 export type SearchResult = {
   score: number;
   show: Show;
+};
+
+export type WatchlistContextValue = {
+  watchlist: Show[];
+  add: (show: Show) => void;
+  remove: (id: number) => void;
+  isInWatchlist: (id: number) => boolean;
+};
+
+export type Theme = "light" | "dark";
+
+export type ThemeContextType = {
+  theme: Theme;
+  toggleTheme: () => void;
 };

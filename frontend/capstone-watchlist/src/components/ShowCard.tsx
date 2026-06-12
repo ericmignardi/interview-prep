@@ -1,12 +1,25 @@
-import type { Show } from "../types/types";
 import { Link } from "react-router-dom";
+import { useWatchlist } from "../hooks/useWatchlist";
+import type { Show } from "../types/types";
 
-// A presentational card for one show. Wrapped in a Link to its detail page.
+// A card for one show. Wrapped in a Link to its detail page, with a
+// watchlist toggle button overlaid.
 export function ShowCard({ show }: { show: Show }) {
+  const { isInWatchlist, add, remove } = useWatchlist();
+  const inList = isInWatchlist(show.id);
+
+  // The whole card is a <Link>, so the button must NOT navigate on click.
+  const handleToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (inList) remove(show.id);
+    else add(show);
+  };
+
   return (
     <Link
       to={`/show/${show.id}`}
-      className="block overflow-hidden rounded-lg border border-gray-200 shadow-sm transition hover:shadow-md"
+      className="relative block overflow-hidden rounded-lg border border-gray-200 shadow-sm transition hover:shadow-md"
     >
       {show.image ? (
         <img
@@ -19,6 +32,16 @@ export function ShowCard({ show }: { show: Show }) {
           No image
         </div>
       )}
+
+      <button
+        type="button"
+        onClick={handleToggle}
+        aria-label={inList ? "Remove from watchlist" : "Add to watchlist"}
+        className="absolute right-2 top-2 rounded-full bg-white/90 px-2 py-1 text-lg shadow"
+      >
+        {inList ? "❤️" : "🤍"}
+      </button>
+
       <div className="p-3">
         <h3 className="font-semibold">{show.name}</h3>
         <p className="text-sm text-gray-500">

@@ -39,7 +39,9 @@ export const SearchPage = () => {
         if (isActive) setResults(data.map((r) => r.show));
       } catch (err) {
         if (isActive)
-          setError(err instanceof Error ? err.message : "Unable to fetch shows");
+          setError(
+            err instanceof Error ? err.message : "Unable to fetch shows",
+          );
       } finally {
         if (isActive) setLoading(false);
       }
@@ -53,10 +55,9 @@ export const SearchPage = () => {
   }, [debouncedQuery]);
 
   return (
-    <div className="min-h-screen p-4">
-      {/* Search */}
+    <div>
       <input
-        className="mb-4 rounded-md px-2 py-1 focus:outline-none border border-slate-300/80"
+        className="mb-4 w-full max-w-sm rounded-md border border-gray-300/60 px-2 py-1 focus:outline-none"
         aria-label="Search shows"
         placeholder="Search shows..."
         type="text"
@@ -67,9 +68,12 @@ export const SearchPage = () => {
 
       {/* Status + results */}
       {loading && <p>Loading shows...</p>}
-      {error && <p>{error}</p>}
+      {error && <p className="text-red-500">{error}</p>}
       {!loading && !error && query.trim() && results.length === 0 && (
-        <p>No shows found</p>
+        <p className="text-gray-500">No shows found</p>
+      )}
+      {!loading && !query.trim() && (
+        <p className="text-gray-500">Search for a show to get started.</p>
       )}
 
       <div className="grid grid-cols-3 items-start gap-4">
