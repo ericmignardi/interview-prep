@@ -1,122 +1,84 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useEffect, useState } from "react";
+import { ShowCard } from "./components/ShowCard";
+import type { SearchResult, Show } from "./types/types";
+import { useDebounce } from "./hooks/useDebounce";
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
+  const [query, setQuery] = useState<string>("");
+  const [results, setResults] = useState<Show[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const debouncedQuery = useDebounce(query, 400);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const handleSearch = async () => {
+      // Empty query → no search; clear results and bail.
+      if (!debouncedQuery.trim()) {
+        if (isActive) {
+          setResults([]);
+          setError(null);
+        }
+        return;
+      }
+
+      if (isActive) {
+        setLoading(true);
+        setError(null);
+      }
+
+      try {
+        const response = await fetch(
+          `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(debouncedQuery)}`,
+        );
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        // search returns SearchResult[] = [{ score, show }, ...] → map to Show[]
+        const data: SearchResult[] = await response.json();
+        if (isActive) setResults(data.map((r) => r.show));
+      } catch (err) {
+        if (isActive)
+          setError(
+            err instanceof Error ? err.message : "Unable to fetch shows",
+          );
+      } finally {
+        if (isActive) setLoading(false);
+      }
+    };
+
+    handleSearch();
+
+    return () => {
+      isActive = false; // ignore a stale/in-flight response if query changes
+    };
+  }, [debouncedQuery]);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen p-4">
+      {/* Search */}
+      <input
+        className="mb-4 rounded-md px-2 py-1 focus:outline-none border border-slate-300/80"
+        aria-label="Search shows"
+        placeholder="Search shows..."
+        type="text"
+        name="query"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
 
-      <div className="ticks"></div>
+      {/* Status + results */}
+      {loading && <p>Loading shows...</p>}
+      {error && <p>{error}</p>}
+      {!loading && !error && query.trim() && results.length === 0 && (
+        <p>No shows found</p>
+      )}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
-}
-
-export default App
+      <div className="grid grid-cols-3 items-start gap-4">
+        {results.map((show) => (
+          <ShowCard key={show.id} show={show} />
+        ))}
+      </div>
+    </div>
+  );
+};
