@@ -1,10 +1,13 @@
 import type { Show } from "../types/types";
+import { Link } from "react-router-dom";
 
-// A presentational card for one show. (Tailwind classes are placeholders — tweak
-// them once your Tailwind setup is done; they won't error if Tailwind isn't ready.)
+// A presentational card for one show. Wrapped in a Link to its detail page.
 export function ShowCard({ show }: { show: Show }) {
   return (
-    <article className="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+    <Link
+      to={`/show/${show.id}`}
+      className="block overflow-hidden rounded-lg border border-gray-200 shadow-sm transition hover:shadow-md"
+    >
       {show.image ? (
         <img
           src={show.image.medium}
@@ -25,6 +28,6 @@ export function ShowCard({ show }: { show: Show }) {
           <span className="text-sm">⭐ {show.rating.average}</span>
         )}
       </div>
-    </article>
+    </Link>
   );
 }
