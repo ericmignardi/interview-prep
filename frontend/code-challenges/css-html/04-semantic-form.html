@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+  CSS Challenge 04 — Semantic & Accessible Form
+
+  Task: Style this registration form so it looks clean and is fully accessible.
+  The HTML is already correct semantically — your job is CSS + a11y verification.
+
+  A11y checklist (these should already pass — verify you haven't broken them):
+  ✅ Every input has an associated <label> (via `for`/`id`)
+  ✅ Required fields are marked with `required` and visually indicated
+  ✅ Error messages use `role="alert"` so screen readers announce them
+  ✅ The fieldset groups related inputs with a <legend>
+  ✅ Focus styles are visible (do NOT use `outline: none` without a replacement)
+  ✅ Color is not the only way information is conveyed (don't rely on red alone)
+
+  CSS task:
+  1. Style the form to look like a real sign-up page (card, inputs full-width,
+     proper spacing, a styled submit button)
+  2. Show the .error message in red with an icon or border — but also add an
+     icon or text (not just color) so it's accessible to colorblind users
+  3. Add a visible :focus style to inputs (outline, ring, border change — your call)
+  4. Style the required asterisk (*)
+
+  Stretch: add a CSS-only password strength indicator using sibling selectors
+  and :valid/:invalid pseudo-classes.
+
+  Open in browser. Tab through all fields and verify focus is always visible.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>04 — Semantic Form</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* TODO: style .form-card, labels, inputs, button, .error, .required-note */
+
+  </style>
+</head>
+<body>
+  <div class="form-card">
+    <h1>Create account</h1>
+    <p class="required-note"><span aria-hidden="true">*</span> Required field</p>
+
+    <form novalidate>
+      <fieldset>
+        <legend>Personal info</legend>
+
+        <div class="field">
+          <label for="name">Full name <span aria-hidden="true" class="req">*</span></label>
+          <input id="name" type="text" name="name" required autocomplete="name"
+                 aria-describedby="name-error" />
+          <p id="name-error" class="error" role="alert" hidden>
+            ⚠ Please enter your full name.
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email address <span aria-hidden="true" class="req">*</span></label>
+          <input id="email" type="email" name="email" required autocomplete="email"
+                 aria-describedby="email-error" />
+          <p id="email-error" class="error" role="alert" hidden>
+            ⚠ Please enter a valid email address.
+          </p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Security</legend>
+
+        <div class="field">
+          <label for="password">Password <span aria-hidden="true" class="req">*</span></label>
+          <input id="password" type="password" name="password" required
+                 aria-describedby="password-hint password-error"
+                 minlength="8" />
+          <p id="password-hint" class="hint">Must be at least 8 characters.</p>
+          <p id="password-error" class="error" role="alert" hidden>
+            ⚠ Password must be at least 8 characters.
+          </p>
+        </div>
+      </fieldset>
+
+      <button type="submit">Create account</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+  CSS Challenge 05 — CSS Custom Properties & Theming
+
+  Task: Implement a light/dark mode toggle using CSS custom properties (variables).
+  No JavaScript color logic — all color changes happen in CSS via a class swap.
+  The JS only toggles a class on <html>.
+
+  Requirements:
+  1. Define your color palette as CSS custom properties on :root (light mode defaults)
+     — at minimum: --color-bg, --color-surface, --color-text, --color-accent
+  2. Define dark mode overrides on html.dark (NOT on body or a media query —
+     the toggle must be JS-driven so the user can switch regardless of OS preference)
+  3. The "Toggle theme" button should show "☀ Light mode" when dark, "☾ Dark mode" when light
+  4. All color on the page should come from your variables — no hardcoded hex in component rules
+  5. Add a smooth transition on background/color for the theme swap
+
+  Stretch: also respect prefers-color-scheme as the default (system preference),
+  but allow the button to override it.
+
+  Open in browser and toggle between themes to verify all colors swap correctly.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>05 — CSS Variables & Theming</title>
+  <style>
+    /* TODO: define --color-bg, --color-surface, --color-text, --color-accent on :root */
+    :root {
+      /* light mode */
+    }
+
+    /* TODO: dark mode overrides */
+    html.dark {
+    }
+
+    /* ── Base ── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      /* TODO: use var(--color-bg) for background, var(--color-text) for color */
+      min-height: 100vh;
+      padding: 2rem;
+      /* TODO: add transition for smooth swap */
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* TODO: use var(--color-surface) */
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .navbar .logo { font-weight: 700; font-size: 1.25rem; }
+
+    /* ── Toggle button ── */
+    .theme-toggle {
+      border: none;
+      cursor: pointer;
+      padding: .5rem 1rem;
+      border-radius: 20px;
+      font-size: .875rem;
+      /* TODO: use accent color */
+    }
+
+    /* ── Cards ── */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+
+    .card {
+      /* TODO: use var(--color-surface) */
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .card h2 { margin-bottom: .5rem; }
+    .card p  { font-size: .875rem; opacity: .75; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <span class="logo">MyApp</span>
+    <button class="theme-toggle" id="toggle">☾ Dark mode</button>
+  </nav>
+
+  <div class="cards">
+    <div class="card"><h2>CSS Variables</h2><p>Custom properties cascade like any CSS value and can be changed at runtime.</p></div>
+    <div class="card"><h2>Theming</h2><p>Define your palette once on :root, override on html.dark — every component updates automatically.</p></div>
+    <div class="card"><h2>No JS logic</h2><p>The JS only toggles a class. All color decisions live in CSS where they belong.</p></div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('toggle');
+    btn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      btn.textContent = isDark ? '☀ Light mode' : '☾ Dark mode';
+    });
+  </script>
+</body>
+</html>

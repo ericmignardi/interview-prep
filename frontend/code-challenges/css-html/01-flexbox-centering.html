@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+  CSS Challenge 01 — Flexbox Centering
+
+  Task: Center the .card both horizontally AND vertically on the page.
+  The card should stay centered even if the viewport is resized.
+
+  Rules:
+  - Use flexbox on the .page container (no grid, no absolute positioning)
+  - Do NOT change any HTML
+  - The card itself should not need any positioning
+
+  Common trap: forgetting that the container needs a HEIGHT for vertical
+  centering to work (100vh is your friend).
+
+  Open in browser to verify: the card should sit dead-center.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>01 — Flexbox Centering</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background: #f0f4f8;
+    }
+
+    .page {
+      /* TODO: make this a flex container that centers its child
+         both horizontally and vertically.
+         Hint: the container needs a height. */
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.1);
+      padding: 2rem 3rem;
+      text-align: center;
+    }
+
+    .card h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+    .card p  { color: #666; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <h1>Centered Card</h1>
+      <p>I should be dead-center on the page.</p>
+    </div>
+  </div>
+</body>
+</html>

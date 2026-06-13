@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+  CSS Challenge 03 — Sticky Navbar
+
+  Task: Build a sticky navigation bar that:
+  1. Sticks to the top of the viewport when the user scrolls (position: sticky)
+  2. Has the logo on the LEFT and the nav links on the RIGHT (flexbox)
+  3. Has a bottom border/shadow to visually separate it from the page content
+  4. The active link (.active) is visually distinct (underline, color, bold — your call)
+
+  Rules:
+  - Use flexbox for the navbar layout (logo left, links right)
+  - Do NOT change the HTML
+  - The page content below should be long enough to require scrolling
+
+  Stretch: on mobile (< 600px), hide the nav links and show a hamburger icon
+  (☰) — no JS needed, just hide/show with CSS.
+
+  Open in browser and scroll to verify the navbar stays at the top.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>03 — Sticky Navbar</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; }
+
+    /* ── Navbar ── */
+    .navbar {
+      /* TODO: sticky positioning, flex layout, padding, background, border/shadow */
+    }
+
+    .navbar .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-decoration: none;
+      color: #1a1a2e;
+    }
+
+    .navbar nav {
+      /* TODO: flex + gap for the links */
+    }
+
+    .navbar nav a {
+      text-decoration: none;
+      color: #555;
+      font-size: .9rem;
+    }
+
+    .navbar nav a.active {
+      /* TODO: make the active link stand out */
+    }
+
+    /* ── Page content ── */
+    .content {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    section { margin-bottom: 4rem; }
+    h2 { margin-bottom: 1rem; }
+    p  { color: #555; line-height: 1.7; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="#">MyApp</a>
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <section id="home">
+      <h2>Home</h2>
+      <p>Scroll down to see the navbar stick to the top of the viewport. Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
+    </section>
+    <section id="about">
+      <h2>About</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+      <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+      irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+      id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+      totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+  CSS Challenge 02 — Responsive Card Grid
+
+  Task: Make the card grid respond to screen size:
+    - Mobile  (< 600px):   1 column
+    - Tablet  (600–900px): 2 columns
+    - Desktop (> 900px):   3 columns
+
+  Rules:
+  - Use CSS Grid on .grid (no flexbox for the layout)
+  - Use media queries (or a single repeat(auto-fit, minmax(...)) — your call)
+  - Cards should all be the same height within a row (grid handles this automatically)
+  - Do NOT change any HTML
+
+  Stretch: make the last card span full width on the 2-column breakpoint.
+
+  Open in browser and resize the window to verify all three layouts.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>02 — Responsive Card Grid</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { font-family: sans-serif; background: #f0f4f8; padding: 2rem; }
+
+    h1 { margin-bottom: 1.5rem; }
+
+    .grid {
+      /* TODO: CSS Grid with responsive columns */
+      gap: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      padding: 1.5rem;
+    }
+
+    .card h2 { font-size: 1rem; margin-bottom: .5rem; }
+    .card p  { color: #666; font-size: .875rem; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h1>Projects</h1>
+  <div class="grid">
+    <div class="card"><h2>tono</h2><p>Next.js full-stack app with AI audio generation, auth, and billing.</p></div>
+    <div class="card"><h2>dropzone</h2><p>React SPA + Express API for file uploads with socket.io live updates.</p></div>
+    <div class="card"><h2>fanimal</h2><p>Pet adoption platform with Prisma, Cloudinary, and RHF forms.</p></div>
+    <div class="card"><h2>cpq</h2><p>Configure-price-quote tool for generating PDF quotes dynamically.</p></div>
+    <div class="card"><h2>interview-prep</h2><p>Self-paced coding prep across JS, TS, React, Node, and full-stack.</p></div>
+  </div>
+</body>
+</html>

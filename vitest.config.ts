@@ -5,6 +5,9 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
-    include: ['frontend/code-challenges/**/*.test.{ts,tsx}'],
+    include: [
+      'frontend/code-challenges/**/*.test.{ts,tsx}',
+      'fullstack/code-challenges/**/*.test.{ts,tsx}',
+    ],
   },
 });

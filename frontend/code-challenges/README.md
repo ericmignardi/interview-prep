@@ -8,6 +8,7 @@ code-challenges/
   javascript/   # plain JS — run with: node <file>.js
   typescript/   # TS — type-check with: npx tsc --noEmit  (no output = pass)
   react/        # React + tests — run with: npx vitest run <Name>
+  css-html/     # open in browser — visual verification
 ```
 
 **Workflow:** open a challenge → read the prompt → implement the stub yourself → run it (see commands
@@ -61,3 +62,20 @@ above) → tell Claude when done/stuck for a review + stretch variant.
 | R10 | [ThemeContext.tsx](react/ThemeContext.tsx) | Context: provider + `useContext` + custom consumer hook (guard) | ✅ 2026-06-08 — 3/3 (fixed w/ help); key lesson: `undefined` default is what makes the no-provider guard work |
 | M1 | [Ticker.tsx](react/Ticker.tsx) | MECHANICS: stale-closure interval (effect runs once → fix it) | ✅ 2026-06-07 — 3/3; used functional updater + explained the trap correctly |
 | — | [StaleClosureDemo.tsx](react/StaleClosureDemo.tsx) | proof of the stale-closure trap (reference) | ✅ demo |
+| R11 | [MemoDemo.tsx](react/MemoDemo.tsx) | `useMemo` — cache expensive computation; prove it skips on unrelated re-renders | scratch |
+| R12 | [MemoizedList.tsx](react/MemoizedList.tsx) | `React.memo` + `useCallback` — why memo alone isn't enough without stable refs | scratch |
+| R13 | [DebouncedSearch.tsx](react/DebouncedSearch.tsx) | ⭐ debounced fetch + AbortController + all 4 UI states — most-asked junior take-home | scratch |
+| R14 | [FilterableList.tsx](react/FilterableList.tsx) | filter + sort during render — no separate state for derived data | scratch |
+| R15 | [AccessibleModal.tsx](react/AccessibleModal.tsx) | a11y modal — Escape key, backdrop click, focus management, ARIA | scratch |
+| R16 | [LiftState.tsx](react/LiftState.tsx) | lifting state — two siblings sharing state via common parent | scratch |
+
+## CSS / HTML — `css-html/`
+> Open in browser to verify. No automated tests — visual + manual a11y check.
+
+| # | File | Focus | Status |
+|---|---|---|---|
+| 1 | [01-flexbox-centering.html](css-html/01-flexbox-centering.html) | Center a card with flexbox (horizontal + vertical) | scratch |
+| 2 | [02-responsive-card-grid.html](css-html/02-responsive-card-grid.html) | CSS Grid: 1→2→3 column responsive layout | scratch |
+| 3 | [03-sticky-navbar.html](css-html/03-sticky-navbar.html) | Sticky nav: logo left, links right, position sticky | scratch |
+| 4 | [04-semantic-form.html](css-html/04-semantic-form.html) | Accessible form: labels, fieldset, focus styles, error states | scratch |
+| 5 | [05-css-variables-theming.html](css-html/05-css-variables-theming.html) | CSS custom properties + JS-driven light/dark toggle | scratch |

@@ -10,5 +10,10 @@
     "jsx": "react-jsx",
     "lib": ["ES2020", "DOM", "DOM.Iterable"]
   },
-  "include": ["frontend/code-challenges/**/*.ts", "frontend/code-challenges/**/*.tsx"]
+  "include": [
+    "frontend/code-challenges/**/*.ts",
+    "frontend/code-challenges/**/*.tsx",
+    "fullstack/code-challenges/**/*.ts",
+    "fullstack/code-challenges/**/*.tsx"
+  ]
 }
