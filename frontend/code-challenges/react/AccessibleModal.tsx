@@ -42,10 +42,18 @@ export function AccessibleModal({ open, onClose, children }: Props) {
   useEffect(() => {
     if (!open) return;
 
-    // TODO: store document.activeElement as prevFocusRef.current
-    // TODO: focus the dialogRef
-    // TODO: add a keydown listener that calls onClose on 'Escape'
-    // cleanup: remove the listener; restore prevFocusRef.current?.focus()
+    prevFocusRef.current = document.activeElement as HTMLElement;
+    dialogRef.current?.focus();
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose();
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      prevFocusRef.current?.focus();
+    };
   }, [open, onClose]);
 
   if (!open) return null;
