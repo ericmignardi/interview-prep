@@ -27,17 +27,28 @@ interface Props {
 
 export default function MemoDemo({ items }: Props) {
   // TODO: dark mode state
+  const [darkMode, setDarkMode] = useState<boolean>(false)
 
   // TODO: computeCount ref (starts at 0)
+  const computeCount = useRef<number>(0)
 
   // TODO: useMemo — filter even numbers, sum them; increment computeCount ref inside
-  const sum = 0; // replace this line
+  // const sum = 0; // replace this line
+
+  const memoSum = useMemo(() => {
+    computeCount.current++;
+    return items.filter((item) => item % 2 === 0).reduce((prev, curr) => { return prev + curr }, 0);
+  }, [items])
 
   return (
-    <div data-testid="container">
+    <div data-testid="container" className={darkMode ? "dark" : undefined}>
       {/* TODO: toggle button */}
-      <p data-testid="sum">{sum}</p>
+      <button onClick={() => setDarkMode(!darkMode)}>
+        Toggle dark mode
+      </button>
+      <p data-testid="sum">{memoSum}</p>
       {/* TODO: compute-count paragraph */}
+      <p data-testid="compute-count">{computeCount.current}</p>
     </div>
   );
 }

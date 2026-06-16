@@ -32,23 +32,30 @@ interface Props {
 }
 
 export default function FilterableList({ items }: Props) {
-  // TODO: query state (string, default '')
-  // TODO: asc state (boolean, default true → A→Z)
+  const [query, setQuery] = useState('');
+  const [asc, setAsc] = useState(true);
 
-  // TODO: derive visible — filter + sort (no useState/useEffect for this)
+  const visible = items
+    .filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+    .sort((a, b) => asc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
 
   return (
     <div>
       <input
         aria-label="Filter"
-        // TODO: value + onChange
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
       />
-      <button
-        // TODO: onClick toggle sort
-      >
-        {/* TODO: button label reflecting current sort */}
+      <button onClick={() => setAsc(a => !a)}>
+        {asc ? 'Sort Z→A' : 'Sort A→Z'}
       </button>
-      {/* TODO: render list or empty state */}
+      {visible.length === 0 ? (
+        <p data-testid="empty">No matches</p>
+      ) : (
+        <ul>
+          {visible.map(item => <li key={item.id}>{item.name}</li>)}
+        </ul>
+      )}
     </div>
   );
 }

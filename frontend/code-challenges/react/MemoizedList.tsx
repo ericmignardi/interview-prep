@@ -29,23 +29,36 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { memo, useCallback, useRef, useState } from 'react';
 
-// TODO: implement Item as a React.memo'd component
-// interface ItemProps { text: string; onRemove: (text: string) => void; }
-// const Item = memo(function Item({ text, onRemove }: ItemProps) { ... });
+interface ItemProps { text: string; onRemove: (text: string) => void; }
+
+const Item = memo(function Item({ text, onRemove }: ItemProps) {
+  const renderCount = useRef(0);
+  renderCount.current++;
+
+  return (
+    <li>
+      {text}
+      <button onClick={() => onRemove(text)}>Remove</button>
+      <span data-testid={`renders-${text}`}>{renderCount.current}</span>
+    </li>
+  );
+});
 
 export default function MemoizedList() {
   const [items, setItems] = useState(['alpha', 'beta', 'gamma']);
-  // TODO: tick state
+  const [tick, setTick] = useState(0);
 
-  // TODO: onRemove wrapped in useCallback
-  //   setItems(prev => prev.filter(i => i !== text))
-  //   deps: [] — functional updater means we don't need items in deps
+  const onRemove = useCallback((text: string) => {
+    setItems(prev => prev.filter(i => i !== text));
+  }, []);
 
   return (
     <div>
-      {/* TODO: Tick button */}
+      <button onClick={() => setTick(t => t + 1)}>Tick</button>
       <ul>
-        {/* TODO: render Item for each item */}
+        {items.map(item => (
+          <Item key={item} text={item} onRemove={onRemove} />
+        ))}
       </ul>
     </div>
   );

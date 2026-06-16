@@ -2,7 +2,7 @@ import { render, screen, fireEvent, act, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
 import DebouncedSearch from './DebouncedSearch';
 
-beforeEach(() => vi.useFakeTimers());
+beforeEach(() => vi.useFakeTimers({ shouldAdvanceTime: true }));
 afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllGlobals();

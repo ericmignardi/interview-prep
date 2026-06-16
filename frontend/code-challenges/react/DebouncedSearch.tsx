@@ -29,18 +29,40 @@ import { useEffect, useState } from 'react';
 
 export default function DebouncedSearch() {
   const [query, setQuery] = useState('');
-  // TODO: loading, error, results state
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [results, setResults] = useState<string[]>([]);
 
   useEffect(() => {
     if (!query) {
-      // TODO: clear results and return early (no fetch)
+      setResults([]);
+      setError(null);
+      setLoading(false);
       return;
     }
 
     const controller = new AbortController();
 
-    // TODO: debounce — setTimeout → fetch → update state
-    // cleanup: clearTimeout + controller.abort()
+    const id = setTimeout(async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch(`/api/search?q=${query}`, { signal: controller.signal });
+        if (!res.ok) throw new Error('Request failed');
+        const data: string[] = await res.json();
+        setResults(data);
+      } catch (err) {
+        if (err instanceof Error && err.name === 'AbortError') return;
+        setError('Something went wrong');
+      } finally {
+        setLoading(false);
+      }
+    }, 400);
+
+    return () => {
+      clearTimeout(id);
+      controller.abort();
+    };
   }, [query]);
 
   return (
@@ -51,7 +73,14 @@ export default function DebouncedSearch() {
         aria-label="Search"
         placeholder="Search…"
       />
-      {/* TODO: loading / error / empty / results */}
+      {loading && <p data-testid="loading">Loading…</p>}
+      {error && <p data-testid="error">Something went wrong</p>}
+      {!loading && !error && query && results.length === 0 && (
+        <p data-testid="empty">No results</p>
+      )}
+      {results.length > 0 && (
+        <ul>{results.map(r => <li key={r}>{r}</li>)}</ul>
+      )}
     </div>
   );
 }
