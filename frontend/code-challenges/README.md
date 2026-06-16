@@ -62,12 +62,17 @@ above) → tell Claude when done/stuck for a review + stretch variant.
 | R10 | [ThemeContext.tsx](react/ThemeContext.tsx) | Context: provider + `useContext` + custom consumer hook (guard) | ✅ 2026-06-08 — 3/3 (fixed w/ help); key lesson: `undefined` default is what makes the no-provider guard work |
 | M1 | [Ticker.tsx](react/Ticker.tsx) | MECHANICS: stale-closure interval (effect runs once → fix it) | ✅ 2026-06-07 — 3/3; used functional updater + explained the trap correctly |
 | — | [StaleClosureDemo.tsx](react/StaleClosureDemo.tsx) | proof of the stale-closure trap (reference) | ✅ demo |
-| R11 | [MemoDemo.tsx](react/MemoDemo.tsx) | `useMemo` — cache expensive computation; prove it skips on unrelated re-renders | scratch |
-| R12 | [MemoizedList.tsx](react/MemoizedList.tsx) | `React.memo` + `useCallback` — why memo alone isn't enough without stable refs | scratch |
-| R13 | [DebouncedSearch.tsx](react/DebouncedSearch.tsx) | ⭐ debounced fetch + AbortController + all 4 UI states — most-asked junior take-home | scratch |
-| R14 | [FilterableList.tsx](react/FilterableList.tsx) | filter + sort during render — no separate state for derived data | scratch |
+| R11 | [MemoDemo.tsx](react/MemoDemo.tsx) | `useMemo` — cache expensive computation; prove it skips on unrelated re-renders | ✅ |
+| R12 | [MemoizedList.tsx](react/MemoizedList.tsx) | `React.memo` + `useCallback` — why memo alone isn't enough without stable refs | ✅ |
+| R13 | [DebouncedSearch.tsx](react/DebouncedSearch.tsx) | ⭐ debounced fetch + AbortController + all 4 UI states — most-asked junior take-home | ✅ |
+| R14 | [FilterableList.tsx](react/FilterableList.tsx) | filter + sort during render — no separate state for derived data | ✅ |
 | R15 | [AccessibleModal.tsx](react/AccessibleModal.tsx) | a11y modal — Escape key, backdrop click, focus management, ARIA | scratch |
 | R16 | [LiftState.tsx](react/LiftState.tsx) | lifting state — two siblings sharing state via common parent | scratch |
+| R17 | [CartReducer.tsx](react/CartReducer.tsx) | `useReducer` — shopping cart with ADD/REMOVE/CLEAR + derived total | scratch |
+| R18 | [useForm.ts](react/useForm.ts) | custom hook — form values, validation, touched state, handleSubmit | scratch |
+| R19 | [ContextCart.tsx](react/ContextCart.tsx) | `useContext` + `useReducer` — shared cart state without prop drilling | scratch |
+| R20 | [PaginatedList.tsx](react/PaginatedList.tsx) | pagination — fetch page 1 on mount, Load More appends next pages | scratch |
+| R21 | [ErrorBoundaryWrapper.tsx](react/ErrorBoundaryWrapper.tsx) | Error Boundary class component — `getDerivedStateFromError` + `componentDidCatch` | scratch |
 
 ## CSS / HTML — `css-html/`
 > Open in browser to verify. No automated tests — visual + manual a11y check.
