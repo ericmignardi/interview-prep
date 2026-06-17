@@ -65,11 +65,21 @@ function calcTotal(items: CartItem[]): number {
 }
 
 function reducer(state: CartState, action: CartAction): CartState {
-  // TODO: handle ADD — increment qty if exists, otherwise push new item
-  // TODO: handle REMOVE — filter out by id
-  // TODO: handle CLEAR — return empty state
-  // TODO: after each case, recalculate total with calcTotal()
-  return state;
+  let items: CartItem[];
+  switch (action.type) {
+    case 'ADD': {
+      const existing = state.items.find(i => i.id === action.payload.id);
+      items = existing
+        ? state.items.map(i => i.id === action.payload.id ? { ...i, qty: i.qty + 1 } : i)
+        : [...state.items, { ...action.payload, qty: 1 }];
+      return { items, total: calcTotal(items) };
+    }
+    case 'REMOVE':
+      items = state.items.filter(i => i.id !== action.payload);
+      return { items, total: calcTotal(items) };
+    case 'CLEAR':
+      return { items: [], total: 0 };
+  }
 }
 
 const initialState: CartState = { items: [], total: 0 };
@@ -80,10 +90,21 @@ export default function CartReducer({ products }: Props) {
   return (
     <div>
       <div>
-        {/* TODO: render an Add button for each product */}
+        {products.map(p => (
+          <button key={p.id} data-testid={`add-${p.id}`} onClick={() => dispatch({ type: 'ADD', payload: p })}>
+            Add {p.name}
+          </button>
+        ))}
       </div>
       <ul>
-        {/* TODO: render each cart item with its Remove button */}
+        {state.items.map(item => (
+          <li key={item.id} data-testid={`item-${item.id}`}>
+            {item.name} x{item.qty}
+            <button data-testid={`remove-${item.id}`} onClick={() => dispatch({ type: 'REMOVE', payload: item.id })}>
+              Remove
+            </button>
+          </li>
+        ))}
       </ul>
       <p data-testid="total">${state.total.toFixed(2)}</p>
       <button data-testid="clear" onClick={() => dispatch({ type: 'CLEAR' })}>

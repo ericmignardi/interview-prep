@@ -44,17 +44,16 @@ interface State {
 export default class ErrorBoundaryWrapper extends React.Component<Props, State> {
   state: State = { hasError: false, error: null };
 
-  static getDerivedStateFromError(_error: Error): State {
-    // TODO: return state that triggers the fallback
-    return { hasError: false, error: null };
+  static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, error };
   }
 
-  componentDidCatch(_error: Error, _info: React.ErrorInfo): void {
-    // TODO: log the error and component stack
+  componentDidCatch(error: Error, info: React.ErrorInfo): void {
+    console.error(error, info.componentStack);
   }
 
   render() {
-    // TODO: return fallback if hasError, otherwise return children
+    if (this.state.hasError) return this.props.fallback;
     return this.props.children;
   }
 }

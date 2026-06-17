@@ -35,18 +35,25 @@ export default function PaginatedList() {
   const [loading, setLoading] = useState(false);
 
   async function fetchPage(pageNum: number) {
-    // TODO: fetch /api/items?page={pageNum}
-    // TODO: setLoading(true) before, setLoading(false) after
-    // TODO: append new items to existing list (don't replace)
-    // TODO: update hasMore from response
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/items?page=${pageNum}`);
+      const data: ApiResponse = await res.json();
+      setItems(prev => [...prev, ...data.items]);
+      setHasMore(data.hasMore);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
-    // TODO: fetch page 1 on mount
+    fetchPage(1);
   }, []);
 
   function loadMore() {
-    // TODO: increment page and fetch next page
+    const next = page + 1;
+    setPage(next);
+    fetchPage(next);
   }
 
   return (

@@ -39,21 +39,25 @@ export function useForm<T extends Record<string, string>>(config: FormConfig<T>)
   const [touched, setTouched] = useState<Partial<Record<keyof T, boolean>>>({});
 
   function handleChange(field: keyof T, value: string) {
-    // TODO: update values[field] to value
+    setValues(prev => ({ ...prev, [field]: value }));
   }
 
   function handleBlur(field: keyof T) {
-    // TODO: mark field as touched
-    // TODO: run validate(values) and update errors
+    setTouched(prev => ({ ...prev, [field]: true }));
+    setErrors(validate(values));
   }
 
   function handleSubmit(onSubmit: (values: T) => void) {
     return (e: FormEvent) => {
       e.preventDefault();
-      // TODO: mark ALL fields as touched
-      // TODO: run validate(values)
-      // TODO: update errors
-      // TODO: if no errors, call onSubmit(values)
+      const allTouched = Object.keys(values).reduce(
+        (acc, key) => ({ ...acc, [key]: true }),
+        {} as Partial<Record<keyof T, boolean>>
+      );
+      setTouched(allTouched);
+      const newErrors = validate(values);
+      setErrors(newErrors);
+      if (Object.keys(newErrors).length === 0) onSubmit(values);
     };
   }
 

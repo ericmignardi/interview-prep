@@ -56,24 +56,50 @@ type CartAction =
   | { type: 'REMOVE'; payload: string }
   | { type: 'CLEAR' };
 
-// TODO: create CartContext (hint: use null as default, guard in useCart)
+interface CartContextValue {
+  state: CartState;
+  dispatch: Dispatch<CartAction>;
+}
+
+const CartContext = createContext<CartContextValue | null>(null);
+
+function calcTotal(items: CartItem[]): number {
+  return items.reduce((sum, item) => sum + item.price * item.qty, 0);
+}
 
 function reducer(state: CartState, action: CartAction): CartState {
-  // TODO: same reducer as R17 — ADD increments qty or pushes, REMOVE filters, CLEAR empties
-  // TODO: recalculate total on each action
-  return state;
+  let items: CartItem[];
+  switch (action.type) {
+    case 'ADD': {
+      const existing = state.items.find(i => i.id === action.payload.id);
+      items = existing
+        ? state.items.map(i => i.id === action.payload.id ? { ...i, qty: i.qty + 1 } : i)
+        : [...state.items, { ...action.payload, qty: 1 }];
+      return { items, total: calcTotal(items) };
+    }
+    case 'REMOVE':
+      items = state.items.filter(i => i.id !== action.payload);
+      return { items, total: calcTotal(items) };
+    case 'CLEAR':
+      return { items: [], total: 0 };
+  }
 }
 
 const initialState: CartState = { items: [], total: 0 };
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  // TODO: useReducer + provide via context
-  return <>{children}</>;
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <CartContext.Provider value={{ state, dispatch }}>
+      {children}
+    </CartContext.Provider>
+  );
 }
 
 export function useCart() {
-  // TODO: useContext(CartContext) + throw if null
-  throw new Error('useCart must be inside CartProvider');
+  const ctx = useContext(CartContext);
+  if (!ctx) throw new Error('useCart must be inside CartProvider');
+  return ctx;
 }
 
 interface ItemProps {
@@ -81,18 +107,20 @@ interface ItemProps {
 }
 
 export function AddToCartButton({ item }: ItemProps) {
-  // TODO: dispatch ADD via useCart
+  const { dispatch } = useCart();
   return (
-    <button data-testid={`add-${item.id}`}>Add {item.name}</button>
+    <button data-testid={`add-${item.id}`} onClick={() => dispatch({ type: 'ADD', payload: item })}>
+      Add {item.name}
+    </button>
   );
 }
 
 export function CartSummary() {
-  // TODO: read state via useCart
+  const { state } = useCart();
   return (
     <div>
-      <p data-testid="count">0 items</p>
-      <p data-testid="total">$0.00</p>
+      <p data-testid="count">{state.items.length} items</p>
+      <p data-testid="total">${state.total.toFixed(2)}</p>
     </div>
   );
 }
