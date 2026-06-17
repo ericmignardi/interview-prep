@@ -30,6 +30,15 @@
     /* ── Navbar ── */
     .navbar {
       /* TODO: sticky positioning, flex layout, padding, background, border/shadow */
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid black;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+      background: white;
+      padding: 0 2rem;
     }
 
     .navbar .logo {
@@ -41,6 +50,9 @@
 
     .navbar nav {
       /* TODO: flex + gap for the links */
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
     .navbar nav a {
@@ -51,6 +63,8 @@
 
     .navbar nav a.active {
       /* TODO: make the active link stand out */
+      text-decoration: underline;
+      text-decoration-color: blue;
     }
 
     /* ── Page content ── */
