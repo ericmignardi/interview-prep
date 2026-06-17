@@ -37,8 +37,13 @@ interface SearchInputProps {
 }
 
 export function SearchInput({ query, onQueryChange }: SearchInputProps) {
-  // TODO: implement
-  return <div />;
+  return (
+    <input
+      aria-label="Search"
+      value={query}
+      onChange={(e) => onQueryChange(e.target.value)}
+    />
+  );
 }
 
 interface ResultsListProps {
@@ -47,13 +52,28 @@ interface ResultsListProps {
 }
 
 export function ResultsList({ query, items }: ResultsListProps) {
-  // TODO: filter items by query (case-insensitive); show all when query is empty
-  // TODO: return <ul>/<li> or <p data-testid="empty">
-  return <div />;
+  const visible = query
+    ? items.filter(item => item.toLowerCase().includes(query.toLowerCase()))
+    : items;
+
+  if (visible.length === 0) return <p data-testid="empty">No results</p>;
+
+  return (
+    <ul>
+      {visible.map(item => <li key={item}>{item}</li>)}
+    </ul>
+  );
 }
 
 export default function LiftState() {
   // TODO: query state
+  const [query, setQuery] = useState<string>("")
   // TODO: render SearchInput + ResultsList, passing shared state down
-  return <div />;
+
+  return (
+    <div>
+      <SearchInput query={query} onQueryChange={setQuery} />
+      <ResultsList query={query} items={ITEMS} />
+    </div>
+  );
 }
